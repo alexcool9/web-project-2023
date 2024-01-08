@@ -5,14 +5,14 @@ const mongoose = require('mongoose');
 let bodyParser = require('body-parser');
 const usersRouter = require('./routes/users.routes.js');
 const cardsRouter = require('./routes/cards.routes.js');
+var cors = require('cors');
 
 const app = express();
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-// ...
-// ...
+app.use(cors({origin: 'http://localhost:8181'}));
 
 //Health check
 app.get("/", (req, res)=>{
@@ -30,7 +30,7 @@ app.listen(port, ()=>{
 });
 
 mongoose
-  .connect(process.env.DB || 'mongodb://127.0.0.1:27017/test_alex')
+  .connect(process.env.DB1 || 'mongodb://127.0.0.1:27017/test_alex')
   .then((x) => {
     console.log(`Connected to Mongo! Database name: "${x.connections[0].name}"`)
   })

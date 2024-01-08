@@ -32,7 +32,7 @@ Router.post("/", async (req,res)=>{
         res.send(user);
     } catch (error) {
         console.log('error', error);
-        res.send("An error occured");
+        res.json({errors: "An error occured"});
     }
 });
 
@@ -45,7 +45,7 @@ Router.post("/login", async (req,res)=>{
     try {
         const user = await User.findOne({ email: req.body.email });
         if (!user) { 
-            return res.status(400).send("Invalid email or password");
+            return res.status(400).json({errors: "Invalid email or password"});
         }
 
         console.log('user', user);
@@ -55,12 +55,12 @@ Router.post("/login", async (req,res)=>{
             user.password
         );
         if (!validPassword)
-            return res.status(400).send("Invalid email or password");
+            return res.status(400).json({errors: "Invalid email or password"});
 
         const token = user.generateAuthToken();
         res.send(token);
     } catch (error) {
-        res.send("An error occured");
+        res.json({errors: "An error occured"});
     }
 
 });

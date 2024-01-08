@@ -1,5 +1,6 @@
 # Dependencies
 node_modules
+client/node_modules
 
 # Build/Production
 /client/build
@@ -27,6 +28,7 @@ node_modules
 
 # Generated / Auto-generated files
 /dist
+/client/dist
 /dist-ssr
 .eslintcache
 
